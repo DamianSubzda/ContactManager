@@ -1,0 +1,26 @@
+﻿@model ContactManager.Models.EmailCampaign
+
+@{
+    ViewData["Title"] = "Edytuj kampanię";
+    Layout = "_Layout";
+}
+
+<h2>Edytuj kampanię</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Subject">Temat</label>
+        <input asp-for="Subject" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Message">Treść</label>
+        <textarea asp-for="Message" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="GroupId">Grupa docelowa</label>
+        <select asp-for="GroupId" asp-items="ViewBag.Groups" class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Zapisz</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Anuluj</a>
+</form>

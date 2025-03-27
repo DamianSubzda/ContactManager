@@ -1,0 +1,37 @@
+﻿@model List<ContactManager.Models.Contact>
+
+@{
+    ViewData["Title"] = "Lista kontaktów";
+    Layout = "_Layout";
+}
+
+<h2>Kontakty</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.FirstName</td>
+                <td>@contact.LastName</td>
+                <td>@contact.Email</td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@contact.Id" class="btn btn-warning btn-sm">Edytuj</a>
+
+                    <form asp-action="Delete" asp-route-id="@contact.Id" method="post" style="display:inline;"
+                          onsubmit="return confirm('Czy na pewno chcesz usunąć ten kontakt?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

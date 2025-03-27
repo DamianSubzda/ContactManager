@@ -1,0 +1,35 @@
+﻿@model ContactManager.Models.EmailCampaign
+
+@{
+    ViewData["Title"] = "Szczegóły kampanii";
+    Layout = "_Layout";
+}
+
+<h2>Szczegóły kampanii</h2>
+
+<div class="mb-3">
+    <strong>Temat:</strong> @Model.Subject
+</div>
+
+<div class="mb-3">
+    <strong>Grupa docelowa:</strong> @Model.Group.Name
+</div>
+
+<div class="mb-3">
+    <strong>Treść wiadomości:</strong>
+    <div class="border rounded p-2" style="white-space: pre-wrap;">
+        @Model.Message
+    </div>
+</div>
+
+<div class="mb-3">
+    <strong>Odbiorcy:</strong>
+    <ul>
+        @foreach (var contact in Model.Group.ContactGroups.Select(cg => cg.Contact))
+        {
+            <li>@contact.FirstName @contact.LastName – @contact.Email</li>
+        }
+    </ul>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">← Powrót</a>

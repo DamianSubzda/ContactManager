@@ -1,0 +1,36 @@
+﻿@model ContactManager.Models.Contact
+@{
+    ViewData["Title"] = "Dodaj kontakt";
+    Layout = "_Layout";
+    var groups = ViewBag.Groups as List<ContactManager.Models.Group> ?? new List<ContactManager.Models.Group>();
+
+}
+
+<h2>Dodaj kontakt</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group mt-3">
+        <label>Przypisz do grup:</label>
+        <select id="groupSelect" name="groupIds" multiple class="form-control">
+            @foreach (var group in groups)
+            {
+                <option value="@group.Id">@group.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Zapisz</button>
+</form>

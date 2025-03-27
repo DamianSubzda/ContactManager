@@ -1,0 +1,19 @@
+﻿@model ContactManager.Models.Group
+
+@{
+    ViewData["Title"] = "Edytuj grupę";
+    Layout = "_Layout";
+}
+
+<h2>Edytuj grupę</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Zapisz</button>
+    <a asp-action="Index" class="btn btn-secondary mt-2">Anuluj</a>
+</form>

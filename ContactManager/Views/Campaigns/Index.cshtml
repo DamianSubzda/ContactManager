@@ -1,0 +1,45 @@
+﻿@model List<ContactManager.Models.EmailCampaign>
+
+@{
+    ViewData["Title"] = "Kampanie e-mailowe";
+    Layout = "_Layout";
+}
+
+<h2>Kampanie</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Nowa kampania</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Temat</th>
+            <th>Grupa</th>
+            <th>Treść</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Subject</td>
+                <td>@c.Group.Name</td>
+                <td>
+                    @(c.Message.Length > 30 ? c.Message.Substring(0, 30) + "..." : c.Message)
+                    <a asp-action="Details" asp-route-id="@c.Id" class="btn btn-info btn-sm">Zobacz</a>
+                </td>
+                <td>
+                    <form asp-action="Send" asp-route-id="@c.Id" method="post" style="display:inline;"
+                          onsubmit="return confirm('Wysłać kampanię do grupy?');">
+                        <button type="submit" class="btn btn-success btn-sm">Wyślij</button>
+                    </form>
+                    <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-warning btn-sm">Edytuj</a>
+                    <form asp-action="Delete" asp-route-id="@c.Id" method="post" style="display:inline;"
+                          onsubmit="return confirm('Usunąć tę kampanię?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

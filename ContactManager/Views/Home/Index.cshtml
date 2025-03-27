@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "ContactMailer";
+    Layout = "_Layout";
+}
+
+<h1>ContactMailer</h1>
+
+<div>
+    <h2>Kontakty</h2>
+    <a asp-controller="Contacts" asp-action="Create" class="btn btn-primary">Dodaj kontakt</a>
+    <a asp-controller="Contacts" asp-action="Index" class="btn btn-secondary">Zarządzaj kontaktami</a>
+</div>
+
+<div class="mt-4">
+    <h2>Grupy kontaktów</h2>
+    <a asp-controller="Groups" asp-action="Create" class="btn btn-primary">Nowa grupa</a>
+    <a asp-controller="Groups" asp-action="Index" class="btn btn-secondary">Zarządzaj grupami</a>
+</div>
+
+<div class="mt-4">
+    <h2>Kampanie e-mailowe</h2>
+    <a asp-controller="Campaigns" asp-action="Create" class="btn btn-primary">Nowa kampania</a>
+    <a asp-controller="Campaigns" asp-action="Index" class="btn btn-secondary">Zarządzaj kampaniami</a>
+</div>

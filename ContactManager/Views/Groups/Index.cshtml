@@ -1,0 +1,34 @@
+﻿@model List<ContactManager.Models.Group>
+
+@{
+    ViewData["Title"] = "Grupy kontaktów";
+    Layout = "_Layout";
+}
+
+<h2>Grupy kontaktów</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Dodaj nową grupę</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var group in Model)
+        {
+            <tr>
+                <td>@group.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@group.Id" class="btn btn-warning btn-sm">Edytuj</a>
+                    <form asp-action="Delete" asp-route-id="@group.Id" method="post" style="display:inline;"
+                          onsubmit="return confirm('Czy na pewno chcesz usunąć tę grupę?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
