@@ -91,15 +91,35 @@ namespace ContactManager.Controllers
             if (campaign == null)
                 return NotFound();
 
-            var recipients = campaign.Group.ContactGroups
-                .Select(cg => cg.Contact.Email)
-                .ToList();
+            int sentCount = 0;
 
-            Console.WriteLine($"Wysyłanie kampanii do: {string.Join(", ", recipients)}");
+            foreach (var cg in campaign.Group.ContactGroups)
+            {
+                bool alreadySent = _context.EmailSents
+                    .Any(log => log.ContactId == cg.ContactId && log.EmailCampaignId == campaign.Id);
 
-            TempData["Message"] = $"Kampania została wysłana do {recipients.Count} odbiorców.";
+                if (alreadySent)
+                    continue;
+
+                var email = new EmailSent
+                {
+                    ContactId = cg.ContactId,
+                    EmailCampaignId = campaign.Id,
+                    SubjectSnapshot = campaign.Subject,
+                    MessageSnapshot = campaign.Message,
+                };
+
+                _context.EmailSents.Add(email);
+
+                sentCount++;
+            }
+
+            _context.SaveChanges();
+
+            TempData["Message"] = $"Kampania została wysłana do {sentCount} odbiorców.";
             return RedirectToAction(nameof(Index));
         }
+
 
 
         [HttpPost]

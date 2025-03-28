@@ -1,0 +1,49 @@
+﻿@model ContactManager.Models.Contact
+
+@{
+    ViewData["Title"] = "Szczegóły kontaktu";
+    Layout = "_Layout";
+    var emails = ViewBag.SentEmails as List<ContactManager.Models.EmailSent> ?? new();
+}
+
+<h2>Szczegóły kontaktu</h2>
+
+<div class="mb-3">
+    <strong>Imię i nazwisko:</strong> @Model.FirstName @Model.LastName
+</div>
+
+<div class="mb-3">
+    <strong>Adres e-mail:</strong> @Model.Email
+</div>
+
+<div class="mb-3">
+    <strong>Grupy:</strong>
+    <ul>
+        @foreach (var group in Model.ContactGroups.Select(cg => cg.Group))
+        {
+            <li>@group.Name</li>
+        }
+    </ul>
+</div>
+
+<div class="mb-3">
+    <strong>Otrzymane emaile:</strong>
+    @if (emails.Any())
+    {
+        <div class="list-group">
+            @foreach (var email in emails)
+            {
+                <div class="list-group-item mb-2 border rounded shadow-sm">
+                    <h5 class="mb-1">@email.SubjectSnapshot</h5>
+                    <p class="mb-1">@email.MessageSnapshot</p>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">Brak otrzymanych wiadomości e-mail.</p>
+    }
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">← Powrót</a>

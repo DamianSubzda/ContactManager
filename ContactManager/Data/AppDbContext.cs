@@ -13,6 +13,7 @@ namespace ContactManager.Data
         public DbSet<ContactGroup> ContactGroups { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<EmailCampaign> EmailCampaigns { get; set; }
+        public DbSet<EmailSent> EmailSents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +29,12 @@ namespace ContactManager.Data
                 .HasOne(cg => cg.Group)
                 .WithMany(g => g.ContactGroups)
                 .HasForeignKey(cg => cg.GroupId);
+
+            modelBuilder.Entity<EmailSent>()
+                .HasOne(e => e.EmailCampaign)
+                .WithMany()
+                .HasForeignKey(e => e.EmailCampaignId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
     }

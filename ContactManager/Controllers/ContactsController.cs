@@ -41,6 +41,28 @@ namespace ContactManager.Controllers
             return View(contact);
         }
 
+        public IActionResult Details(int id)
+        {
+            var contact = _context.Contacts
+                .Include(c => c.ContactGroups)
+                .ThenInclude(cg => cg.Group)
+                .FirstOrDefault(c => c.Id == id);
+
+            if (contact == null)
+                return NotFound();
+
+            var sentEmails = _context.EmailSents
+                .Where(log => log.ContactId == contact.Id)
+                .Include(log => log.EmailCampaign)
+                .ToList();
+
+            ViewBag.SentEmails = sentEmails;
+
+            return View(contact);
+        }
+
+
+
         [HttpPost]
         public IActionResult Create(Contact contact, List<int> groupIds)
         {

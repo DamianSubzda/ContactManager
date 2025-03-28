@@ -2,6 +2,7 @@
 using ContactManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ContactManager.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250328072232_PreventCascadeDelete")]
+    partial class PreventCascadeDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,14 +101,8 @@ namespace ContactManager.Migrations
                     b.Property<int>("ContactId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EmailCampaignId")
+                    b.Property<int>("EmailCampaignId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("MessageSnapshot")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SubjectSnapshot")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -174,7 +171,8 @@ namespace ContactManager.Migrations
                     b.HasOne("ContactManager.Models.EmailCampaign", "EmailCampaign")
                         .WithMany()
                         .HasForeignKey("EmailCampaignId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Contact");
 
