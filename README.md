@@ -20,5 +20,6 @@
 ### Kampanie
 ![Podgląd aplikacji](Images/7.PNG)
 ![Podgląd aplikacji](Images/8.PNG)
-![Podgląd aplikacji](Images/9.PNG)
 ![Podgląd aplikacji](Images/10.PNG)
+![Podgląd aplikacji](Images/9.PNG)
+
