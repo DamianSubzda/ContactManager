@@ -13,6 +13,7 @@
 ![Podgląd aplikacji](Images/2.PNG)
 ![Podgląd aplikacji](Images/3.PNG)
 ![Podgląd aplikacji](Images/4.PNG)
+![Podgląd aplikacji](Images/11.PNG)
 ### Grupy
 ![Podgląd aplikacji](Images/5.PNG)
 ![Podgląd aplikacji](Images/6.PNG)
@@ -20,3 +21,4 @@
 ![Podgląd aplikacji](Images/7.PNG)
 ![Podgląd aplikacji](Images/8.PNG)
 ![Podgląd aplikacji](Images/9.PNG)
+![Podgląd aplikacji](Images/10.PNG)
